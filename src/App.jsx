@@ -1,24 +1,31 @@
+import { Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import PostsPage from './pages/PostsPage'
-import UsersPage from './pages/UsersPage'
-import CommentsPage from './pages/CommentsPage'
-import CartPage from './pages/CartPage'
-import AlbumsPage from './pages/AlbumsPage'
+
+const PostsPage = lazy(() => import('./pages/PostsPage'))
+const PostDetailPage = lazy(() => import('./pages/PostDetailPage'))
+const UsersPage = lazy(() => import('./pages/UsersPage'))
+const CommentsPage = lazy(() => import('./pages/CommentsPage'))
+const CartPage = lazy(() => import('./pages/CartPage'))
+const AlbumsPage = lazy(() => import('./pages/AlbumsPage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+
 import './App.css'
 
-function App() {
-  return (
-    <BrowserRouter>
+const App = () => (
+  <BrowserRouter>
+    <Suspense fallback={<div className="loading-state">Loading page...</div>}>
       <Routes>
         <Route path="/" element={<PostsPage />} />
         <Route path="/posts" element={<PostsPage />} />
+        <Route path="/posts/:id" element={<PostDetailPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/comments" element={<CommentsPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/albums" element={<AlbumsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
-  )
-}
+    </Suspense>
+  </BrowserRouter>
+)
 
 export default App

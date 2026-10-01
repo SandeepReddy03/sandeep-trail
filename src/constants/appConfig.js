@@ -12,3 +12,11 @@ export const navItems = [
   { to: '/cart', label: 'Cart' },
   { to: '/albums', label: 'Albums' },
 ]
+
+export const footerNames = [
+  'Sandeep — Frontend Developer',
+  'Ravi — Backend Developer',
+  'Kiran — UI/UX Designer',
+  'Ananya — Full Stack Developer',
+  'Neha — Tester',
+]
